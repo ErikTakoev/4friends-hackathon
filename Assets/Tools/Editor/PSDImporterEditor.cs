@@ -40,10 +40,50 @@ public class PSDImporterEditor : Editor
             float x = float.Parse(values[1], CultureInfo.InvariantCulture);
             float y = float.Parse(values[2], CultureInfo.InvariantCulture);
 
-            CreateNode(importer, name, x, y, i);
+            Transform find = FindNode(importer.transform, name);
+            if (find)
+                ChangeNode(find, x, y, i);
+            else
+                CreateNode(importer, name, x, y, i);
             //Debug.Log("Name:" + values[0] + ", x:" + x + ", y:" + y);
             i++;
         }
+    }
+
+    private void ChangeNode(Transform find, float x, float y, int sort)
+    {
+        Sprite sprite = null;
+        SpriteRenderer spriteRenderer = null;
+        Image image = null;
+
+        find.TryGetComponent<SpriteRenderer>(out spriteRenderer);
+        if (spriteRenderer)
+            sprite = spriteRenderer.sprite;
+
+        find.TryGetComponent<Image>(out image);
+        if (image)
+            sprite = image.sprite;
+
+
+        if (!sprite) Debug.LogError("Sprite not find:" + find.name);
+
+        find.localPosition = new Vector3(x + sprite.texture.width * 0.5f, y + sprite.texture.height * 0.5f, -sort * 0.001f);
+    }
+
+    Transform FindNode(Transform transform, string name)
+    {
+        Transform find = transform.Find(name);
+        if (find) return find;
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform tr = transform.GetChild(i);
+
+            Transform find2 = FindNode(tr, name);
+            if (find2) return find2;
+        }
+
+        return null;
     }
 
     void CreateNode(PSDImporter importer, string name, float x, float y, int sort)
