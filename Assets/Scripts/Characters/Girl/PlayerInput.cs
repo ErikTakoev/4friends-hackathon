@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ public class PlayerInput : MonoBehaviour
 
     float velocityY = 0;
     bool isMovementPaused = false;
+    List<GameObject> currentCollisions = new List<GameObject>();
+
+    private event Action<Vector3> OnMove;
 
     private void Awake()
     {
@@ -24,24 +28,58 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && currentCollisions.Count != 0)
         {
-            velocityY = 5;
-        }
-        rigidbody2D.velocity = new Vector2(4f, velocityY);
-
-        if(velocityY > -5f)
-        {
-            velocityY -= 0.1f;
-            if (velocityY < -5f)
-                velocityY = -5f;
+            velocityY = 20f;
         }
 
+        Vector3 pos = transform.localPosition;
+        if(currentCollisions.Count == 0)
+        {
+            pos.x += 4.5f * Time.deltaTime;
+        }
+        else
+        {
+            pos.x += 3.2f * Time.deltaTime;
+        }
+        if(currentCollisions.Count == 0)
+            pos.y -= 5f * Time.fixedDeltaTime;
+
+        if (velocityY > 0)
+        {
+            float v = velocityY * Time.deltaTime;
+
+            float y = transform.localPosition.y + v;
+            pos.y = y;
+            velocityY -= 1.7f;
+            if (velocityY < 0)
+                velocityY = 0;
+        }
+        rigidbody2D.MovePosition(pos);
+        OnMove(pos);
+    }
+
+    
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        // Add the GameObject collided with to the list.
+        currentCollisions.Add(col.gameObject);
+    }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        // Remove the GameObject collided with from the list.
+        currentCollisions.Remove(col.gameObject);
     }
 
     public void PauseMovement(bool pause)
     {
         rigidbody2D.gravityScale = pause ? 0 : 1;
         isMovementPaused = pause;
+    }
+
+    public void SubscribeForMove(Action<Vector3> subscriber)
+    {
+        OnMove += subscriber;
     }
 }

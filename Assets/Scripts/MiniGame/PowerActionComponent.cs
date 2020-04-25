@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PowerActionComponent), typeof(PowerActionProvider))]
 public class PowerActionComponent : MonoBehaviour
 {
     [SerializeField] private GameObject animationLine;
