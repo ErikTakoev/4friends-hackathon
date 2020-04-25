@@ -25,19 +25,19 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && currentCollisions.Count != 0)
         {
-            velocityY = 40f;
+            velocityY = 20f;
         }
 
         Vector3 pos = transform.localPosition;
         if(currentCollisions.Count == 0)
         {
-            pos.x += 3.5f * Time.fixedDeltaTime;
+            pos.x += 4.5f * Time.deltaTime;
         }
         else
         {
-            pos.x += 2.5f * Time.fixedDeltaTime;
+            pos.x += 3.2f * Time.deltaTime;
         }
         if(currentCollisions.Count == 0)
             pos.y -= 5f * Time.fixedDeltaTime;
