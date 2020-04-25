@@ -10,6 +10,7 @@ namespace Fight
         [SerializeField] private Image image;
         [SerializeField] private HpBarViewController hpBarView;
         [SerializeField] private TMP_Text name;
+        [SerializeField] private Animation animation;
         
         public void Show()
         {
@@ -28,6 +29,18 @@ namespace Fight
             name.text = attacker.Name;
             
             hpBarView.UpdateView(attacker);
+        }
+
+        public void PlayAnim(SkillType type)
+        {
+            if (type == SkillType.Attack)
+            {
+                animation.Play("hit");
+            }
+            else
+            {
+                animation.Play("heal");
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Fight
 
         public Skill ChoseMove()
         {
-            if (CurrentHp == Hp)
+            if (CurrentHp >= Hp / 2)
             {
                 var skill = FindSkill("Hard Attack");
 
@@ -22,7 +22,7 @@ namespace Fight
 
             }
 
-            if (CurrentHp <= Hp / 2)
+            if (CurrentHp <= Hp / 2 && Random.Range(0,5) == 2)
             {
                 var skill = FindSkill("Harden");
 
