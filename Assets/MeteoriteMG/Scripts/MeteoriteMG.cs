@@ -7,6 +7,7 @@ public class MeteoriteMG : MonoBehaviour
     [SerializeField] Image rightRed;
     [SerializeField] Image green;
     [SerializeField] Transform arrowTransform;
+    [SerializeField] PlayerInput playerInput;
 
     [SerializeField] float time = 1;
     [SerializeField] float minArrowAngle = -80;
@@ -100,11 +101,13 @@ public class MeteoriteMG : MonoBehaviour
 
     public void StopMG()
     {
+        playerInput.PauseMovement(false);
         gameObject.SetActive(false);
     }
 
     public void PlayMG()
     {
+        playerInput.PauseMovement(true);
         gameObject.SetActive(true);
     }
 }

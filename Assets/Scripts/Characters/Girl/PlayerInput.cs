@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     Rigidbody2D rigidbody2D;
 
     float velocityY = 0;
+    bool isMovementPaused = false;
 
     private void Awake()
     {
@@ -17,6 +18,12 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        if (isMovementPaused)
+        {
+            rigidbody2D.velocity = Vector2.zero;
+            return;
+        }
+
         if(Input.GetMouseButtonDown(0))
         {
             velocityY = 5;
@@ -30,5 +37,10 @@ public class PlayerInput : MonoBehaviour
                 velocityY = -5f;
         }
 
+    }
+
+    public void PauseMovement(bool pause)
+    {
+        isMovementPaused = pause;
     }
 }
