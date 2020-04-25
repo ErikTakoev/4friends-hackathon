@@ -11,6 +11,7 @@ namespace MiniGame
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private MoveCamera moveCamera;
 
+        public event Action OnEnd;
         private event Action OnUpdate;
         
         private bool isStarted = false;
@@ -64,6 +65,7 @@ namespace MiniGame
             playerInput.PauseMovement(false);
             moveCamera.Pause(false);
             gameObject.SetActive(false);
+            OnEnd?.Invoke();
         }
 
         public void PlayMG()
