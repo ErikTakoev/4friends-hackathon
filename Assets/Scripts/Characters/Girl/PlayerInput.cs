@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour
 
     float velocityY = 0;
     bool isMovementPaused = false;
+    List<GameObject> currentCollisions = new List<GameObject>();
 
     private void Awake()
     {
@@ -24,14 +25,22 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && currentCollisions.Count != 0)
         {
-            velocityY = 40f;
+            velocityY = 20f;
         }
 
         Vector3 pos = transform.localPosition;
-        pos.x += 3f * Time.fixedDeltaTime;
-        pos.y -= 5f * Time.fixedDeltaTime;
+        if(currentCollisions.Count == 0)
+        {
+            pos.x += 4.5f * Time.deltaTime;
+        }
+        else
+        {
+            pos.x += 3.2f * Time.deltaTime;
+        }
+        if(currentCollisions.Count == 0)
+            pos.y -= 5f * Time.fixedDeltaTime;
 
         if (velocityY > 0)
         {
@@ -44,6 +53,20 @@ public class PlayerInput : MonoBehaviour
                 velocityY = 0;
         }
         rigidbody2D.MovePosition(pos);
+
+    }
+
+    
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        // Add the GameObject collided with to the list.
+        currentCollisions.Add(col.gameObject);
+    }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        // Remove the GameObject collided with from the list.
+        currentCollisions.Remove(col.gameObject);
     }
 
     public void PauseMovement(bool pause)
