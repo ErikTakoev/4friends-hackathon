@@ -13,6 +13,8 @@ public class FightController : MonoBehaviour
     [SerializeField] private SkillHolder skillHolder;
     [SerializeField] private FightLogger fightLogger;
 
+    [SerializeField] private Animation sceneAnimation;
+    
     private FightVisualEffector visualEffector;
 
     private Dictionary<FightState, Action> fightStateMachine = new Dictionary<FightState, Action>();
@@ -41,6 +43,8 @@ public class FightController : MonoBehaviour
     
     private void Start()
     {
+        sceneAnimation.Play("BossFightIntro");
+        
         fightStateMachine.Add(FightState.FightStarted, OnGameStarted);
         fightStateMachine.Add(FightState.PlayerTurn, PlayerTurn);
         fightStateMachine.Add(FightState.PlayerEffect, PlayerEffect);
@@ -166,6 +170,15 @@ public class FightController : MonoBehaviour
             ApplySkill(playerAttacker, enemyAttacker, skill);
             
             LogData(playerAttacker);
+
+            if (skill.SkillType == SkillType.Attack)
+            {
+                enemyElement.PlayAnim(skill.SkillType);
+            }
+            else
+            {
+                playerElement.PlayAnim(skill.SkillType);
+            }
         }
 
         if (currentState == FightState.EnemyTurn)
@@ -173,6 +186,15 @@ public class FightController : MonoBehaviour
             ApplySkill(enemyAttacker, playerAttacker, skill);   
             
             LogData(enemyAttacker);
+            
+            if (skill.SkillType == SkillType.Attack)
+            {
+                playerElement.PlayAnim(skill.SkillType);
+            }
+            else
+            {
+                enemyElement.PlayAnim(skill.SkillType);
+            }
         }
 
         playerElement.UpdateView(playerAttacker);
@@ -200,6 +222,27 @@ public class FightController : MonoBehaviour
 
         if (EndCheck())
         {
+            if (playerAttacker.Hp <= 0)
+            {
+                fightComplete[FightState.Lose].Invoke();
+            }
+            else if(enemyAttacker.Hp <=0)
+            {
+                fightComplete[FightState.Win].Invoke();
+            }
+            else
+            {
+                fightComplete[FightState.Draw].Invoke();
+            }
+
+            fightLogger.Hide();
+            skillHolder.Hide();
+            sceneAnimation.Stop();
+            
+            sceneAnimation["BossFightAutro"].speed = -1;
+            sceneAnimation["BossFightAutro"].time = sceneAnimation["BossFightAutro"].length;
+            sceneAnimation.Play("BossFightAutro");
+            
             return;
         }
 
@@ -218,5 +261,17 @@ public class FightController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void DisableGame()
+    {
+        if (transform.parent != null)
+        {
+            Destroy(transform.parent.gameObject);
+            
+            return;
+        }
+
+        Destroy(gameObject);
     }
 }

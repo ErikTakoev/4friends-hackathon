@@ -38,6 +38,11 @@ namespace Fight
 
         private void UpdateView()
         {
+            if (!skill.CanUse)
+            {
+                button.enabled = false;
+            }
+
             buttonText.text = $"{skill.Name}";
             skillText.text = $"{skill.SkillType} ({skill.Count}) \n {skill.PositivEffect}";
         }
