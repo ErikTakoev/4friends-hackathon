@@ -17,6 +17,11 @@ namespace MiniGame
         private bool isStarted = false;
         private int winCounter = 0;
         private int loseCounter = 0;
+
+        private string startAnimCamera = "ZoomInCamera";
+        private string startAnimMinigame = "MinigameStart";
+        private string endAnimCamera = "ZoomOutCamera";
+        private string endAnimMinigame = "MinigameEnd";
         
         private void Awake()
         {
@@ -33,14 +38,14 @@ namespace MiniGame
         {
             Debug.LogWarning($"Win perfect hit :{data}");
             ++winCounter;
-            StopMG();
+            StopMG(false);
         }
 
         private void LoseAction()
         {
             Debug.LogWarning($"Lose");
             ++loseCounter;
-            StopMG();
+            StopMG(false);
         }
 
         public void Update()
@@ -58,10 +63,45 @@ namespace MiniGame
             return gameObject.activeSelf;
         }
 
-        public void StopMG()
+        public void StopMG(bool withoutAnim)
         {
             isStarted = false;
             actionComponent.IsStoped = true;
+
+            if (!withoutAnim)
+                PlayMinigameAnimEnd();
+            else
+                RestoreRunner();
+        }
+
+        private void PlayMinigameAnimEnd()
+        {
+            Animation anim = GetComponent<Animation>();
+            int clipCount = anim.GetClipCount();
+            if (anim == null || !anim.Play(endAnimMinigame))
+            {
+                Debug.Assert(false);
+                return;
+            }
+
+            Invoke("PlayCameraAnimEnd", anim.GetClip(endAnimMinigame).length);
+        }
+
+        private void PlayCameraAnimEnd()
+        {
+            Animation cameraAnim = moveCamera.GetComponent<Animation>();
+            if (cameraAnim == null || !cameraAnim.Play(endAnimCamera))
+            {
+                Debug.Assert(false);
+                return;
+            }
+
+            gameObject.SetActive(false);
+            Invoke("RestoreRunner", cameraAnim.GetClip(endAnimCamera).length);
+        }
+
+        private void RestoreRunner()
+        {
             playerInput.PauseMovement(false);
             moveCamera.Pause(false);
             gameObject.SetActive(false);
@@ -70,11 +110,41 @@ namespace MiniGame
 
         public void PlayMG()
         {
-            isStarted = true;
-            actionComponent.IsStoped = false;
             playerInput.PauseMovement(true);
             moveCamera.Pause(true);
+
+            PlayCameraAnimStart();
+        }
+
+        private void PlayCameraAnimStart()
+        {
+            Animation cameraAnim = moveCamera.GetComponent<Animation>();
+            if (cameraAnim == null || !cameraAnim.Play(startAnimCamera))
+            {
+                Debug.Assert(false);
+                return;
+            }
+
+            Invoke("PlayMinigameAnimStart", cameraAnim.GetClip(startAnimCamera).length);
+        }
+
+        private void PlayMinigameAnimStart()
+        {
+            Animation anim = GetComponent<Animation>();
+            if (anim == null || !anim.Play(startAnimMinigame))
+            {
+                Debug.Assert(false);
+                return;
+            }
+
             gameObject.SetActive(true);
+            Invoke("ActivateMG", anim.GetClip(startAnimMinigame).length);
+        }
+
+        private void ActivateMG()
+        {
+            isStarted = true;
+            actionComponent.IsStoped = false;
         }
     }
 }

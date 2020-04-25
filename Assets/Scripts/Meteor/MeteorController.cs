@@ -14,7 +14,7 @@ public class MeteorController : MonoBehaviour
     private void Start()
     {
         gameObject.SetActive(false);
-        powerActionController.StopMG();
+        powerActionController.StopMG(true);
     }
 
     public void StartFlying(Vector3 shift)
