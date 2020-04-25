@@ -56,6 +56,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("END GAME");
+
+        GameObject.FindObjectOfType<BlackScreen>().EndGame();
+    }
+
     void FixedUpdate()
     {
         if (isMovementPaused)
