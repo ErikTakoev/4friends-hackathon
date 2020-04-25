@@ -8,11 +8,20 @@ public class MeteorController : MonoBehaviour
     [SerializeField] private Collider2D girlCollider;
     [SerializeField] private Collider2D meteorCollider;
     [SerializeField] private Animation flyAnimation;
+    [SerializeField] private Transform cameraTransform;
 
+    const string farFlyAnimName = "FarMeteorAnimation";
+    const string nearFlyAnimName = "NearMeteorAnimation";
+
+    Transform origParent;
     Vector3 currShift;
+    Vector3 currPosition;
 
     private void Start()
     {
+        origParent = transform.parent;
+        currPosition = transform.localPosition;
+
         gameObject.SetActive(false);
         powerActionController.StopMG(true);
     }
@@ -21,10 +30,21 @@ public class MeteorController : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        transform.localPosition += shift - currShift;
+        currPosition += shift - currShift;
         currShift = shift;
 
-        flyAnimation.Play();
+        transform.localPosition = currPosition;
+        transform.parent = cameraTransform;
+
+        flyAnimation.Play(farFlyAnimName);
+        Invoke("OnFarFlyEnd", flyAnimation.GetClip(farFlyAnimName).length);
+    }
+
+    private void OnFarFlyEnd()
+    {
+        transform.parent = origParent;
+        flyAnimation.Play(nearFlyAnimName);
+
         StartCoroutine(CheckIntersection());
     }
 

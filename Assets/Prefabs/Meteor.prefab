@@ -4932,7 +4932,8 @@ MonoBehaviour:
   powerActionController: {fileID: 0}
   girlCollider: {fileID: 0}
   meteorCollider: {fileID: 8663345800702740829}
-  flyAnimation: {fileID: 4849720086448208320}
+  flyAnimation: {fileID: 0}
+  cameraTransform: {fileID: 0}
 --- !u!111 &4849720086448208320
 Animation:
   m_ObjectHideFlags: 0
@@ -4942,9 +4943,10 @@ Animation:
   m_GameObject: {fileID: 7342620037407078776}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 67e1b51dda869c44d91fec53a422163d, type: 2}
+  m_Animation: {fileID: 0}
   m_Animations:
   - {fileID: 7400000, guid: 67e1b51dda869c44d91fec53a422163d, type: 2}
+  - {fileID: 7400000, guid: 6a44f6270ff88334a8ec61e7f6fc74ce, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

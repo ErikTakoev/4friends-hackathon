@@ -247,6 +247,12 @@ Transform:
   m_Father: {fileID: 1741102320}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &382938524 stripped
+Animation:
+  m_CorrespondingSourceObject: {fileID: 4849720086448208320, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+    type: 3}
+  m_PrefabInstance: {fileID: 5017567386909405884}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &465903801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,7 +1338,7 @@ PrefabInstance:
     - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -27.68311
+      value: -44.980045
       objectReference: {fileID: 0}
     - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
         type: 3}
@@ -1374,6 +1380,16 @@ PrefabInstance:
       propertyPath: girlCollider
       value: 
       objectReference: {fileID: 1640313369}
+    - target: {fileID: 7044458047388283276, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: flyAnimation
+      value: 
+      objectReference: {fileID: 382938524}
+    - target: {fileID: 7044458047388283276, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 922910002}
     - target: {fileID: 7342620037407078776, guid: d9ca30c66f8340f43b52b8a53f6dd654,
         type: 3}
       propertyPath: m_Name
