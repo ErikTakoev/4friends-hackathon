@@ -31,7 +31,6 @@ namespace Fight
 
         private void CreateSkillView()
         {
-
             foreach (var skill in skillList.Skills)
             {
                 var view = Instantiate(skillPrefab, parentTransform);
