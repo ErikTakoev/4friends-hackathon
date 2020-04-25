@@ -463,18 +463,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &811915686 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6205597298076041822, guid: 51de6afdeb6b244389e021ed50833154,
-    type: 3}
-  m_PrefabInstance: {fileID: 6205597299392246518}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c45c387942de143a9b45111d94e7c9d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &901427407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5713972673342505948, guid: 34045cea67dbb814eaeddc13f8f4e1ea,
@@ -730,7 +718,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerInput
       value: 
-      objectReference: {fileID: 811915686}
+      objectReference: {fileID: 6205597299392246519}
     - target: {fileID: 8283795970943072441, guid: 0546bd240978bb347a8d088c8fa5e81f,
         type: 3}
       propertyPath: moveCamera
@@ -1119,7 +1107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meteorController: {fileID: 655643882}
-  playerInput: {fileID: 811915686}
+  playerInput: {fileID: 6205597299392246519}
   persPosToSpawnPoints: {fileID: 1741102320}
 --- !u!1 &1515281011
 GameObject:
@@ -1404,6 +1392,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1162580248376514249, guid: 51de6afdeb6b244389e021ed50833154,
+        type: 3}
+      propertyPath: PowerActionController
+      value: 
+      objectReference: {fileID: 923217992}
     - target: {fileID: 6205597298076041808, guid: 51de6afdeb6b244389e021ed50833154,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1466,3 +1459,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51de6afdeb6b244389e021ed50833154, type: 3}
+--- !u!114 &6205597299392246519 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1162580248376514249, guid: 51de6afdeb6b244389e021ed50833154,
+    type: 3}
+  m_PrefabInstance: {fileID: 6205597299392246518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402c5038346bb41b9abb089ab1a942bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

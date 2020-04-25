@@ -4,14 +4,14 @@ namespace Fight
     {
         public static Skill NormalAttack()
         {
-            var skill = new Skill("Attack", SkillType.Attack, 10, 10);
+            var skill = new Skill("Attack", SkillType.Attack, 15, 100);
 
             return skill;
         }
         
         public static Skill Defend()
         {
-            var skill = new Skill("Defend", SkillType.Defend, 10, 10);
+            var skill = new Skill("Defend", SkillType.Defend, 10, 100);
 
             return skill;
         }
@@ -25,21 +25,21 @@ namespace Fight
         
         public static Skill ForkAttack()
         {
-            var skill = new Skill("Use Fork", SkillType.Attack, 15, 3);
+            var skill = new Skill("Use Fork", SkillType.Attack, 30, 3);
 
             return skill;
         }
         
         public static Skill Cry()
         {
-            var skill = new Skill("Cry", SkillType.Defend, 15, 3);
+            var skill = new Skill("Cry", SkillType.Defend, 35, 3);
 
             return skill;
         }
         
         public static Skill Harden ()
         {
-            var skill = new Skill("Harden", SkillType.Defend, 20, 3);
+            var skill = new Skill("Harden", SkillType.Defend, 25, 3);
 
             return skill;
         }

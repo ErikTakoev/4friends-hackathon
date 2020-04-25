@@ -3,7 +3,7 @@
 public class MeteoriteGenerator : MonoBehaviour
 {
     [SerializeField] private MeteorController meteorController;
-    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private PlayerController playerInput;
     [SerializeField] private Transform persPosToSpawnPoints;
 
     private float spawnTimer;

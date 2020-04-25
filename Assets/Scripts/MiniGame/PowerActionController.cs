@@ -7,8 +7,8 @@ namespace MiniGame
     public class PowerActionController : MonoBehaviour
     {
         [SerializeField] private PowerActionComponent actionComponent;
-        [SerializeField] private PowerActionProvider actionProvider;
-        [SerializeField] private PlayerInput playerInput;
+        [SerializeField] public  PowerActionProvider actionProvider;
+        [SerializeField] private PlayerController playerInput;
         [SerializeField] private MoveCamera moveCamera;
 
         public event Action OnEnd;

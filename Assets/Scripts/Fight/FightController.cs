@@ -75,20 +75,22 @@ public class FightController : MonoBehaviour
     private void OnGameStarted()
     {
         skillHolder.Hide();
-        fightLogger.Hide();
+        fightLogger.Show();
 
+        fightLogger.LogText($"{enemyAttacker.Name} \n would like a battle!");
+        
         call.AddTick(3, MoveNextState);
     }
 
     private void PlayerTurn()
     {
         skillHolder.Show();
-        fightLogger.Show();
+        fightLogger.Hide();
     }
 
     private void EnemyTurn()
     {
-        call.AddTick(2, EnemyUseSkill);
+        EnemyUseSkill();
     }
 
     private void EnemyUseSkill()
@@ -99,13 +101,14 @@ public class FightController : MonoBehaviour
     private void PlayerEffect()
     {
         skillHolder.Hide();
+        fightLogger.Show();
         
-        call.AddTick(1, MoveNextState);
+        call.AddTick(2.5f, MoveNextState);
     }
 
     private void EnemyEffect()
     {
-        MoveNextState();
+        call.AddTick(2.5f, MoveNextState);
     }
 
     private void LogData(Attacker attacker)
