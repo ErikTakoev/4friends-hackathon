@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ServiceLocator
@@ -7,6 +9,14 @@ public class ServiceLocator
 
     public static void Clear()
     {
+        foreach (var o in locators.Select(s=>s.Value))
+        {
+            if (o is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
+        
         locators = new Dictionary<object, object>();
     }
 

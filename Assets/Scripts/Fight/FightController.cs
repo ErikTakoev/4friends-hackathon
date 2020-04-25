@@ -1,0 +1,219 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Fight;
+using UnityEngine;
+
+[RequireComponent(typeof(FightVisualEffector))]
+public class FightController : MonoBehaviour
+{
+    [SerializeField] private FightElement playerElement;
+    [SerializeField] private FightElement enemyElement;
+        
+    [SerializeField] private SkillHolder skillHolder;
+    [SerializeField] private FightLogger fightLogger;
+
+    private FightVisualEffector visualEffector;
+
+    private Dictionary<FightState, Action> fightStateMachine = new Dictionary<FightState, Action>();
+    private Dictionary<FightState, Action> fightComplete = new Dictionary<FightState, Action>();
+
+    private Attacker playerAttacker;
+    private EnemyAttacker enemyAttacker;
+    private Skill lastSkill;
+    
+    private FightState currentState;
+    private FightState nextState
+    {
+        get
+        {
+            if (currentState == FightState.EnemyEffect)
+            {
+                return FightState.PlayerTurn;
+            }
+
+            return currentState + 1;
+        }
+    }
+
+    private DelayCallService call =>
+        ServiceLocator.Get<DelayCallService>();
+    
+    private void Start()
+    {
+        fightStateMachine.Add(FightState.FightStarted, OnGameStarted);
+        fightStateMachine.Add(FightState.PlayerTurn, PlayerTurn);
+        fightStateMachine.Add(FightState.PlayerEffect, PlayerEffect);
+        fightStateMachine.Add(FightState.EnemyTurn, EnemyTurn);
+        fightStateMachine.Add(FightState.EnemyEffect, EnemyEffect);
+
+        fightComplete.Add(FightState.Win, Win);
+        fightComplete.Add(FightState.Lose, Lose);
+        fightComplete.Add(FightState.Draw, Draw);
+        
+        Init();
+        InvokeCurrentState();
+    }
+
+    private void Init()
+    {
+        SetupFighters();
+        
+        skillHolder.Init(playerAttacker);
+        skillHolder.OnUseSkill += UseSkill;
+    }
+
+    private void SetupFighters()
+    {
+        playerAttacker = FighterContainer.Player();
+        enemyAttacker = FighterContainer.Enemy();
+        
+        playerElement.UpdateView(playerAttacker);
+        enemyElement.UpdateView(enemyAttacker);
+    }
+    
+    private void OnGameStarted()
+    {
+        skillHolder.Hide();
+        fightLogger.Hide();
+
+        call.AddTick(3, MoveNextState);
+    }
+
+    private void PlayerTurn()
+    {
+        skillHolder.Show();
+        fightLogger.Show();
+    }
+
+    private void EnemyTurn()
+    {
+        call.AddTick(2, EnemyUseSkill);
+    }
+
+    private void EnemyUseSkill()
+    {
+        UseSkill(enemyAttacker.ChoseMove());
+    }
+
+    private void PlayerEffect()
+    {
+        skillHolder.Hide();
+        
+        call.AddTick(1, MoveNextState);
+    }
+
+    private void EnemyEffect()
+    {
+        MoveNextState();
+    }
+
+    private void LogData(Attacker attacker)
+    {
+        if (lastSkill.SkillType == SkillType.Attack)
+        {
+            fightLogger.LogText($"{attacker.Name} use {lastSkill.Name} \n {InverseAttacker(attacker).Name} got {lastSkill.PositivEffect} dmg.");
+        }
+        else
+        {
+            fightLogger.LogText($"{attacker.Name} use {lastSkill.Name} \n {attacker.Name} restored {lastSkill.PositivEffect} hp.");
+        }
+    }
+
+    private Attacker InverseAttacker(Attacker attacker)
+    {
+        if (attacker == playerAttacker)
+        {
+            return enemyAttacker;
+        }
+
+        return playerAttacker;
+    }
+
+    private void Lose()
+    {
+        
+    }
+
+    private void Win()
+    {
+        
+    }
+
+    private void Draw()
+    {
+        
+    }
+
+    public void MoveNextState()
+    {
+        currentState = nextState;
+
+        InvokeCurrentState();
+    }
+
+    public void UseSkill(Skill skill)
+    {
+        skill.Used();
+
+        lastSkill = skill;
+        
+        if (currentState == FightState.PlayerTurn)
+        {
+            ApplySkill(playerAttacker, enemyAttacker, skill);
+            
+            LogData(playerAttacker);
+        }
+
+        if (currentState == FightState.EnemyTurn)
+        {
+            ApplySkill(enemyAttacker, playerAttacker, skill);   
+            
+            LogData(enemyAttacker);
+        }
+
+        playerElement.UpdateView(playerAttacker);
+        enemyElement.UpdateView(enemyAttacker);
+        
+        MoveNextState();
+    }
+
+    public void ApplySkill(Attacker attacker, Attacker enemy, Skill skill)
+    {
+        if (skill.SkillType == SkillType.Attack)
+        {
+            enemy.ApplyHp(skill);
+        }
+        else
+        {
+            attacker.ApplyHp(skill);
+        }
+
+    }
+
+    private void InvokeCurrentState()
+    {
+        Debug.LogWarning($"State : {currentState}");
+
+        if (EndCheck())
+        {
+            return;
+        }
+
+        fightStateMachine[currentState].Invoke();
+    }
+
+    private bool EndCheck()
+    {
+        if (enemyAttacker.CurrentHp <= 0)
+        {
+            return true;
+        }
+        else if (playerAttacker.CurrentHp <= 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
