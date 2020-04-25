@@ -10,7 +10,7 @@ public class ParallaxGameObject
 
 public class ParallaxController : MonoBehaviour
 {
-    [SerializeField] private ParallaxGameObject[] transforms;
+    [SerializeField] private ParallaxGameObject[] transformParameters;
 	[SerializeField] private float accelCoef = 0.05f;
 
 	Dictionary<Transform, Vector3> initialPositions;
@@ -22,7 +22,7 @@ public class ParallaxController : MonoBehaviour
 		screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 		initialPositions = new Dictionary<Transform, Vector3>();
 
-		foreach (ParallaxGameObject data in transforms)
+		foreach (ParallaxGameObject data in transformParameters)
 		{
 			if (data.transform == null)
 				continue;
@@ -33,7 +33,7 @@ public class ParallaxController : MonoBehaviour
 
     private void Update()
     {
-		if (transforms.Length == 0 || accelCoef == 0.0f)
+		if (transformParameters.Length == 0 || accelCoef == 0.0f)
 		{
 			return;
 		}
@@ -41,7 +41,7 @@ public class ParallaxController : MonoBehaviour
 		Vector3 lastPos = Input.mousePosition;
 		Vector3 shift = (lastPos - screenCenter) * additionalCoef;
 
-		foreach (ParallaxGameObject data in transforms)
+		foreach (ParallaxGameObject data in transformParameters)
 		{
 			if (data.transform == null || data.coef == Vector3.zero)
 				continue;
