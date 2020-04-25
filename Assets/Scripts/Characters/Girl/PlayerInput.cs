@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
     float velocityY = 0;
     bool isMovementPaused = false;
     List<GameObject> currentCollisions = new List<GameObject>();
+    bool doubleJump = true;
 
     private event Action<Vector3> OnMove;
 
@@ -20,7 +21,24 @@ public class PlayerInput : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(currentCollisions.Count != 0)
+            {
+                doubleJump = true;
+                velocityY = 7.5f;
+            }
+            else if(doubleJump)
+            {
+                doubleJump = false;
+                velocityY = 5f;
+            }
+        }
+    }
+
+    void FixedUpdate()
     {
         if (isMovementPaused)
         {
@@ -28,30 +46,27 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        if(Input.GetMouseButtonDown(0) && currentCollisions.Count != 0)
-        {
-            velocityY = 20f;
-        }
+        
 
         Vector3 pos = transform.localPosition;
         if(currentCollisions.Count == 0)
         {
-            pos.x += 4.5f * Time.deltaTime;
+            pos.x += 3.5f * Time.fixedDeltaTime;
         }
         else
         {
-            pos.x += 3.2f * Time.deltaTime;
+            pos.x += 3.0f * Time.fixedDeltaTime;
         }
         if(currentCollisions.Count == 0)
             pos.y -= 5f * Time.fixedDeltaTime;
 
         if (velocityY > 0)
         {
-            float v = velocityY * Time.deltaTime;
+            float v = velocityY * Time.fixedDeltaTime;
 
             float y = transform.localPosition.y + v;
             pos.y = y;
-            velocityY -= 1.7f;
+            velocityY -= 17f * Time.fixedDeltaTime;
             if (velocityY < 0)
                 velocityY = 0;
         }
