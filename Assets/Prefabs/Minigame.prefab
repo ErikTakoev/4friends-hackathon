@@ -402,6 +402,7 @@ MonoBehaviour:
   actionComponent: {fileID: 5452425778326070673}
   actionProvider: {fileID: 5272878703910329886}
   playerInput: {fileID: 0}
+  moveCamera: {fileID: 0}
 --- !u!114 &5272878703910329886
 MonoBehaviour:
   m_ObjectHideFlags: 0

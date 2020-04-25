@@ -26,17 +26,24 @@ public class PlayerInput : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            velocityY = 5;
+            velocityY = 40f;
         }
-        rigidbody2D.velocity = new Vector2(4f, velocityY);
 
-        if(velocityY > -5f)
+        Vector3 pos = transform.localPosition;
+        pos.x += 3f * Time.fixedDeltaTime;
+        pos.y -= 5f * Time.fixedDeltaTime;
+
+        if (velocityY > 0)
         {
-            velocityY -= 0.1f;
-            if (velocityY < -5f)
-                velocityY = -5f;
-        }
+            float v = velocityY * Time.deltaTime;
 
+            float y = transform.localPosition.y + v;
+            pos.y = y;
+            velocityY -= 1.7f;
+            if (velocityY < 0)
+                velocityY = 0;
+        }
+        rigidbody2D.MovePosition(pos);
     }
 
     public void PauseMovement(bool pause)

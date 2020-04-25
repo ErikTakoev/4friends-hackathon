@@ -9,6 +9,7 @@ namespace MiniGame
         [SerializeField] private PowerActionComponent actionComponent;
         [SerializeField] private PowerActionProvider actionProvider;
         [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private MoveCamera moveCamera;
 
         private event Action OnUpdate;
         
@@ -61,6 +62,7 @@ namespace MiniGame
             isStarted = false;
             actionComponent.IsStoped = true;
             playerInput.PauseMovement(false);
+            moveCamera.Pause(false);
             gameObject.SetActive(false);
         }
 
@@ -69,6 +71,7 @@ namespace MiniGame
             isStarted = true;
             actionComponent.IsStoped = false;
             playerInput.PauseMovement(true);
+            moveCamera.Pause(true);
             gameObject.SetActive(true);
         }
     }
