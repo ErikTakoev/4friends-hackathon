@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    public MiniGame.PowerActionController PowerActionController;
+
     CharacterAnimation characterAnimation;
     Rigidbody2D rigidbody2D;
 
     float velocityY = 0;
+    float velocityX = 3;
     bool isMovementPaused = false;
     List<GameObject> currentCollisions = new List<GameObject>();
     bool doubleJump = true;
@@ -19,6 +22,21 @@ public class PlayerInput : MonoBehaviour
     {
         characterAnimation = GetComponent<CharacterAnimation>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        PowerActionController.actionProvider.OnWin += ActionProvider_OnWin;
+        PowerActionController.actionProvider.OnLose += SetHitStars;
+    }
+
+
+    private void ActionProvider_OnWin(bool power)
+    {
+        if (power)
+            velocityX = 6;
+    }
+
+    public void SetHitStars()
+    {
+        velocityX = 0;
+        characterAnimation.SetHitAnimation();
     }
 
     private void Update()
@@ -46,16 +64,14 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        
-
         Vector3 pos = transform.localPosition;
         if(currentCollisions.Count == 0)
         {
-            pos.x += 3.5f * Time.fixedDeltaTime;
+            pos.x += (velocityX + 0.5f) * Time.fixedDeltaTime;
         }
         else
         {
-            pos.x += 3.0f * Time.fixedDeltaTime;
+            pos.x += velocityX  * Time.fixedDeltaTime;
         }
         if(currentCollisions.Count == 0)
             pos.y -= 5f * Time.fixedDeltaTime;
@@ -72,6 +88,8 @@ public class PlayerInput : MonoBehaviour
         }
         rigidbody2D.MovePosition(pos);
         OnMove(pos);
+
+        velocityX = Mathf.MoveTowards(velocityX, 3f, Time.fixedDeltaTime);
     }
 
     

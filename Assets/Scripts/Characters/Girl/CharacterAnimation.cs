@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
     public Sprite[] IdleSprites;
+    public ParticleSystem HitStars;
     int indexSprite;
 
     SpriteRenderer spriteRenderer;
@@ -12,6 +13,11 @@ public class CharacterAnimation : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void SetHitAnimation()
+    {
+        HitStars.Play();
     }
 
     private void FixedUpdate()
