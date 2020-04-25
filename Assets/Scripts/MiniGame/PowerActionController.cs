@@ -17,6 +17,7 @@ namespace MiniGame
         private bool isStarted = false;
         private int winCounter = 0;
         private int loseCounter = 0;
+        private float xDiff = 0;
 
         private string startAnimCamera = "ZoomInCamera";
         private string startAnimMinigame = "MinigameStart";
@@ -90,11 +91,18 @@ namespace MiniGame
         private void PlayCameraAnimEnd()
         {
             Animation cameraAnim = moveCamera.GetComponent<Animation>();
-            if (cameraAnim == null || !cameraAnim.Play(endAnimCamera))
+            if (cameraAnim == null || !cameraAnim.GetClip(endAnimCamera))
             {
                 Debug.Assert(false);
                 return;
             }
+
+            Keyframe[] keys = new Keyframe[2];
+            keys[0] = new Keyframe(0.0f, xDiff);
+            keys[1] = new Keyframe(1.0f, 0.0f);
+            AnimationCurve curve = new AnimationCurve(keys);
+            cameraAnim.GetClip(endAnimCamera).SetCurve("Camera", typeof(Transform), "localPosition.x", curve);
+            cameraAnim.Play(endAnimCamera);
 
             gameObject.SetActive(false);
             Invoke("RestoreRunner", cameraAnim.GetClip(endAnimCamera).length);
@@ -112,6 +120,7 @@ namespace MiniGame
         {
             playerInput.PauseMovement(true);
             moveCamera.Pause(true);
+            xDiff = playerInput.transform.localPosition.x - moveCamera.transform.localPosition.x;
 
             PlayCameraAnimStart();
         }
@@ -119,11 +128,18 @@ namespace MiniGame
         private void PlayCameraAnimStart()
         {
             Animation cameraAnim = moveCamera.GetComponent<Animation>();
-            if (cameraAnim == null || !cameraAnim.Play(startAnimCamera))
+            if (cameraAnim == null || !cameraAnim.GetClip(startAnimCamera))
             {
                 Debug.Assert(false);
                 return;
             }
+
+            Keyframe[] keys = new Keyframe[2];
+            keys[0] = new Keyframe(0.0f, 0.0f);
+            keys[1] = new Keyframe(1.0f, xDiff);
+            AnimationCurve curve = new AnimationCurve(keys);
+            cameraAnim.GetClip(startAnimCamera).SetCurve("Camera", typeof(Transform), "localPosition.x", curve);
+            cameraAnim.Play(startAnimCamera);
 
             Invoke("PlayMinigameAnimStart", cameraAnim.GetClip(startAnimCamera).length);
         }
