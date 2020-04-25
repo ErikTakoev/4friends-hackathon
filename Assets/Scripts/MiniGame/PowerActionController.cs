@@ -10,6 +10,7 @@ namespace MiniGame
         [SerializeField] private PowerActionProvider actionProvider;
         [SerializeField] private PlayerInput playerInput;
 
+        public event Action OnEnd;
         private event Action OnUpdate;
         
         private bool isStarted = false;
@@ -62,6 +63,7 @@ namespace MiniGame
             actionComponent.IsStoped = true;
             playerInput.PauseMovement(false);
             gameObject.SetActive(false);
+            OnEnd?.Invoke();
         }
 
         public void PlayMG()

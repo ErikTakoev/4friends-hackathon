@@ -938,6 +938,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1146675128}
   m_PrefabAsset: {fileID: 0}
+--- !u!70 &1177283140 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8663345800702740829, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+    type: 3}
+  m_PrefabInstance: {fileID: 5017567386909405884}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1215946032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1007,6 +1013,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47d04829576c24896b07c4858770446a, type: 3}
+--- !u!70 &1268415094 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6205597298076041823, guid: 51de6afdeb6b244389e021ed50833154,
+    type: 3}
+  m_PrefabInstance: {fileID: 6205597299392246518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1268415098 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6205597298076041808, guid: 51de6afdeb6b244389e021ed50833154,
+    type: 3}
+  m_PrefabInstance: {fileID: 6205597299392246518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1414636402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,8 +1068,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f834355f05f86a44877666d15ceb847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerActionController: {fileID: 923217992}
+  meteorController: {fileID: 1996004761}
+  girlTransform: {fileID: 1268415098}
   spawnPeriod: 10
+  persPosToSpawn: []
 --- !u!4 &1430075417 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6298764913683547975, guid: 47d04829576c24896b07c4858770446a,
@@ -1205,6 +1225,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b5abc86e8cbf47559ae79c5fda7af21, type: 3}
+--- !u!1 &1996004759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7342620037407078776, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+    type: 3}
+  m_PrefabInstance: {fileID: 5017567386909405884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &1996004760
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996004759}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 67e1b51dda869c44d91fec53a422163d, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 67e1b51dda869c44d91fec53a422163d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &1996004761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996004759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f982cc678106a40888c8f952e897a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerActionController: {fileID: 923217992}
+  girlCollider: {fileID: 1268415094}
+  meteorCollider: {fileID: 1177283140}
+  flyAnimation: {fileID: 1996004760}
 --- !u!4 &2036269565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1337931318984385405, guid: 346043c77bb4546fbb119e72dca9c6da,
@@ -1418,6 +1476,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 346043c77bb4546fbb119e72dca9c6da, type: 3}
+--- !u!1001 &5017567386909405884
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7933534
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6087614
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -27.68311
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279811320465276580, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279811320465276580, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279811320465276580, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279811320465276580, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7342620037407078776, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_Name
+      value: Meteor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d9ca30c66f8340f43b52b8a53f6dd654, type: 3}
 --- !u!1001 &6205597299392246518
 PrefabInstance:
   m_ObjectHideFlags: 0

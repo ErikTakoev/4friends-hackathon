@@ -1,35 +1,35 @@
 ﻿using UnityEngine;
-using MiniGame;
 
 public class MeteoriteGenerator : MonoBehaviour
 {
-    [SerializeField] PowerActionController powerActionController;
-    [SerializeField] float spawnPeriod = 10;
+    [SerializeField] private MeteorController meteorController;
+    [SerializeField] private Transform girlTransform;
+    [SerializeField] private float spawnPeriod = 10;
+    [SerializeField] private float[] persPosToSpawn;
 
-    float spawnTimer;
+    private float spawnTimer;
 
     void Awake()
     {
-        if (powerActionController == null)
+        if (meteorController == null)
         {
             Debug.Assert(false);
             return;
         }
 
-        powerActionController.StopMG();
         spawnTimer = Random.Range(0, spawnPeriod);
     }
 
     void Update()
     {
-        if (powerActionController.IsMGRunning())
+        if (meteorController.gameObject.activeSelf)
             return;
 
         spawnTimer = Mathf.Min(spawnTimer + Time.deltaTime, spawnPeriod);
         if (spawnTimer == spawnPeriod)
         {
             spawnTimer = 0;
-            powerActionController.PlayMG();
+            meteorController.StartFlying(girlTransform.localPosition);
         }
     }
 }
