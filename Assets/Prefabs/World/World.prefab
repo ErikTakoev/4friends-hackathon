@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 7020601245667256304}
   - component: {fileID: 9076340283919474698}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BoxGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
