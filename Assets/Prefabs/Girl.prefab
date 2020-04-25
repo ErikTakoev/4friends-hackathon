@@ -158,6 +158,11 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.y
       value: 1.2850003
       objectReference: {fileID: 0}
+    - target: {fileID: 2470364418902045178, guid: 5da11611ca64e4e47870e985119369c0,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2614981058561628406, guid: 5da11611ca64e4e47870e985119369c0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -223,15 +228,30 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3676318931916547327, guid: 5da11611ca64e4e47870e985119369c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8514374941990605280, guid: 5da11611ca64e4e47870e985119369c0,
         type: 3}
       propertyPath: m_Name
       value: GirlNew
       objectReference: {fileID: 0}
+    - target: {fileID: 8543711709370341528, guid: 5da11611ca64e4e47870e985119369c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8579503548551709817, guid: 5da11611ca64e4e47870e985119369c0,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003546941070997946, guid: 5da11611ca64e4e47870e985119369c0,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5da11611ca64e4e47870e985119369c0, type: 3}
