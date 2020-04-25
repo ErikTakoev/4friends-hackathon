@@ -41,6 +41,7 @@ public class PlayerInput : MonoBehaviour
 
     public void PauseMovement(bool pause)
     {
+        rigidbody2D.gravityScale = pause ? 0 : 1;
         isMovementPaused = pause;
     }
 }

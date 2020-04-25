@@ -42,7 +42,6 @@ public class MeteoriteMG : MonoBehaviour
 
         green.transform.eulerAngles = new Vector3(0, 0, -angleLR);
 
-        stopped = false;
         cycleTime = time;
         reverse = false;
         arrowTransform.eulerAngles = new Vector3(0, 0, Random.Range(minArrowAngle, maxArrowAngle));
@@ -101,12 +100,14 @@ public class MeteoriteMG : MonoBehaviour
 
     public void StopMG()
     {
+        stopped = true;
         playerInput.PauseMovement(false);
         gameObject.SetActive(false);
     }
 
     public void PlayMG()
     {
+        stopped = false;
         playerInput.PauseMovement(true);
         gameObject.SetActive(true);
     }
