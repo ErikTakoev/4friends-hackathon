@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class PlayerInput : MonoBehaviour
     float velocityY = 0;
     bool isMovementPaused = false;
     List<GameObject> currentCollisions = new List<GameObject>();
+
+    private event Action<Vector3> OnMove;
 
     private void Awake()
     {
@@ -53,7 +56,7 @@ public class PlayerInput : MonoBehaviour
                 velocityY = 0;
         }
         rigidbody2D.MovePosition(pos);
-
+        OnMove(pos);
     }
 
     
@@ -73,5 +76,10 @@ public class PlayerInput : MonoBehaviour
     {
         rigidbody2D.gravityScale = pause ? 0 : 1;
         isMovementPaused = pause;
+    }
+
+    public void SubscribeForMove(Action<Vector3> subscriber)
+    {
+        OnMove += subscriber;
     }
 }
