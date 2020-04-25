@@ -3,33 +3,35 @@
 public class MeteoriteGenerator : MonoBehaviour
 {
     [SerializeField] private MeteorController meteorController;
-    [SerializeField] private Transform girlTransform;
-    [SerializeField] private float spawnPeriod = 10;
-    [SerializeField] private float[] persPosToSpawn;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private Transform persPosToSpawnPoints;
 
     private float spawnTimer;
+    private int lastCheckedPos = -1;
 
     void Awake()
     {
-        if (meteorController == null)
+        if (meteorController == null || playerInput == null)
         {
             Debug.Assert(false);
             return;
         }
 
-        spawnTimer = Random.Range(0, spawnPeriod);
+        playerInput.SubscribeForMove(OnMove);
     }
 
-    void Update()
+    void OnMove(Vector3 pos)
     {
         if (meteorController.gameObject.activeSelf)
             return;
 
-        spawnTimer = Mathf.Min(spawnTimer + Time.deltaTime, spawnPeriod);
-        if (spawnTimer == spawnPeriod)
+        if (lastCheckedPos + 1 >= persPosToSpawnPoints.childCount)
+            return;
+
+        if (persPosToSpawnPoints.GetChild(lastCheckedPos + 1).localPosition.x <= pos.x)
         {
-            spawnTimer = 0;
-            meteorController.StartFlying(girlTransform.localPosition);
+            ++lastCheckedPos;
+            meteorController.StartFlying(pos);
         }
     }
 }
