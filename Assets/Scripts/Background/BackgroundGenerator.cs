@@ -14,6 +14,7 @@ public class BackgroundObjectsData
 public class SpawnedBackgroundObjectsData
 {
     public Transform transform;
+    public float initialPos;
     public float speed;
     public float minDensity;
     public float maxDensity;
@@ -105,6 +106,7 @@ public class BackgroundGenerator : MonoBehaviour
                 SpawnedBackgroundObjectsData newData = new SpawnedBackgroundObjectsData();
 
                 newData.transform = Instantiate(objects[i].transform, transform);
+                newData.initialPos = objects[i].transform.localPosition.x;
                 newData.minDensity = objects[i].minDensity;
                 newData.maxDensity = objects[i].maxDensity;
                 newData.speed = objects[i].speed;
@@ -171,14 +173,14 @@ public class BackgroundGenerator : MonoBehaviour
             return;
         }
 
-        float minPos = onAwake ? prevPos.x + destroyDeltaPosX : prevPos.x + spawnDeltaPosX;
+        float minPos = prevPos.x + spawnDeltaPosX;
         for (int i = 0; i <= newCount; ++i)
         {
             int freeIndex = Random.Range(0, canBeSpawned.Count - 1);
             string key = canBeSpawned[freeIndex];
             var obj = objectsPool[key][0];
             float density = Random.Range(obj.minDensity, obj.maxDensity);
-            float startPos = minPos;
+            float startPos = onAwake ? obj.initialPos : minPos;
 
             if (visibleObjects[key].Count != 0)
             {
