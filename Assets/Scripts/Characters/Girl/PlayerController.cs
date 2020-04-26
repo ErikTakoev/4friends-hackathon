@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public MiniGame.PowerActionController PowerActionController;
 
-    CharacterAnimation characterAnimation;
+    public CharacterAnimation characterAnimation;
     Rigidbody2D rigidbody2D;
 
     float velocityY = 0;
@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        characterAnimation = GetComponent<CharacterAnimation>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         PowerActionController.actionProvider.OnWin += ActionProvider_OnWin;
         PowerActionController.actionProvider.OnLose += SetHitStars;
@@ -31,12 +30,15 @@ public class PlayerController : MonoBehaviour
     {
         if (power)
             velocityX = 5;
+
+        characterAnimation.Run();
     }
 
     public void SetHitStars()
     {
         velocityX = 1;
         characterAnimation.SetHitAnimation();
+        characterAnimation.Run();
     }
 
     private void Update()
@@ -47,11 +49,14 @@ public class PlayerController : MonoBehaviour
             {
                 doubleJump = true;
                 velocityY = 7.5f;
+
+                characterAnimation.Jump();
             }
             else if(doubleJump)
             {
                 doubleJump = false;
                 velocityY = 5f;
+                characterAnimation.Jump();
             }
         }
     }
@@ -87,6 +92,10 @@ public class PlayerController : MonoBehaviour
         }
         if(currentCollisions.Count == 0)
             pos.y -= 5f * Time.fixedDeltaTime;
+        else
+        {
+            //characterAnimation.Run();
+        }
 
         if (velocityY > 0)
         {

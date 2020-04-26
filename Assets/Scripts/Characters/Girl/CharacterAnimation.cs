@@ -4,29 +4,37 @@ using UnityEngine;
 
 public class CharacterAnimation : MonoBehaviour
 {
-    public Sprite[] IdleSprites;
     public ParticleSystem HitStars;
-    int indexSprite;
-
-    SpriteRenderer spriteRenderer;
+    // 0 - Run, 1 - Jump, 2 - Idle, 3 - Attack
+    public Animator Animator;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        Animator.SetInteger("State", 0);
+    }
+
+    public void Run()
+    {
+        Animator.SetInteger("State", 0);
+    }
+
+    public void Attack()
+    {
+        Animator.SetInteger("State", 3);
+    }
+
+    public void Idle()
+    {
+        Animator.SetInteger("State", 2);
+    }
+
+    public void Jump()
+    {
+        Animator.SetInteger("State", 1);
     }
 
     public void SetHitAnimation()
     {
         HitStars.Play();
-    }
-
-    private void FixedUpdate()
-    {
-        spriteRenderer.sprite = IdleSprites[indexSprite];
-
-
-        indexSprite++;
-        indexSprite = indexSprite % IdleSprites.Length;
-
     }
 }

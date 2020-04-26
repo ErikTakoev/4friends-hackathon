@@ -1484,6 +1484,11 @@ PrefabInstance:
       propertyPath: PowerActionController
       value: 
       objectReference: {fileID: 923217992}
+    - target: {fileID: 3822282902390469938, guid: 51de6afdeb6b244389e021ed50833154,
+        type: 3}
+      propertyPath: Animator
+      value: 
+      objectReference: {fileID: 6205597299392246520}
     - target: {fileID: 6205597298076041808, guid: 51de6afdeb6b244389e021ed50833154,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1558,6 +1563,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402c5038346bb41b9abb089ab1a942bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &6205597299392246520 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6868867498634641003, guid: 51de6afdeb6b244389e021ed50833154,
+    type: 3}
+  m_PrefabInstance: {fileID: 6205597299392246518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6782237372832110357
 PrefabInstance:
   m_ObjectHideFlags: 0
