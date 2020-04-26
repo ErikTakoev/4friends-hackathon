@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Fight
 {
     public class Skill
@@ -8,6 +10,8 @@ namespace Fight
         public float Count { get; set; }
 
         public bool CanUse => Count != 0;
+
+        public Sprite Icon => Resources.Load<Sprite>($"{Name}");
         
         public Skill(string name, SkillType type, float positive, float count)
         {
