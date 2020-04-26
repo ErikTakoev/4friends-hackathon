@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Fight;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(FightVisualEffector))]
 public class FightController : MonoBehaviour
@@ -293,13 +294,6 @@ public class FightController : MonoBehaviour
 
     public void DisableGame()
     {
-        if (transform.parent != null)
-        {
-            Destroy(transform.parent.gameObject);
-            
-            return;
-        }
-
-        Destroy(gameObject);
+        SceneManager.LoadScene("AutroSceneTest");
     }
 }
