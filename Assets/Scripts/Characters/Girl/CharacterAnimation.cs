@@ -10,7 +10,7 @@ public class CharacterAnimation : MonoBehaviour
 
     private void Awake()
     {
-        Animator.SetInteger("State", 0);
+        Run();
     }
 
     public void Run()
@@ -31,6 +31,11 @@ public class CharacterAnimation : MonoBehaviour
     public void Jump()
     {
         Animator.SetInteger("State", 1);
+    }
+
+    public void Jump_Loop()
+    {
+        Animator.SetInteger("State", 4);
     }
 
     public void SetHitAnimation()

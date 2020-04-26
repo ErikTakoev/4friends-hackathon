@@ -92,10 +92,6 @@ public class PlayerController : MonoBehaviour
         }
         if(currentCollisions.Count == 0)
             pos.y -= 5f * Time.fixedDeltaTime;
-        else
-        {
-            //characterAnimation.Run();
-        }
 
         if (velocityY > 0)
         {
@@ -116,6 +112,7 @@ public class PlayerController : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D col)
     {
+        characterAnimation.Run();
         // Add the GameObject collided with to the list.
         currentCollisions.Add(col.gameObject);
         EnableGravity eg;
