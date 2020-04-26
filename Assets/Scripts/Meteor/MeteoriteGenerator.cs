@@ -31,6 +31,7 @@ public class MeteoriteGenerator : MonoBehaviour
         if (persPosToSpawnPoints.GetChild(lastCheckedPos + 1).localPosition.x <= pos.x)
         {
             ++lastCheckedPos;
+            pos.y = persPosToSpawnPoints.GetChild(lastCheckedPos).localPosition.y;
             meteorController.StartFlying(pos);
         }
     }
