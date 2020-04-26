@@ -83,12 +83,32 @@ public class PlayerController : MonoBehaviour
             GameObject.FindObjectOfType<BlackScreen>().EndGame();
     }
 
+    bool IsMissingReference(UnityEngine.Object unknown)
+    {
+        try
+        {
+            unknown.GetInstanceID();
+            return false;
+        }
+        catch (System.Exception e)
+        {
+            return true;
+        }
+    }
+
     void FixedUpdate()
     {
         if (isMovementPaused)
         {
             rigidbody2D.velocity = Vector2.zero;
             return;
+        }
+
+        for (int i = currentCollisions.Count - 1; i >= 0; i--)
+        {
+            var colision = currentCollisions[i];
+            if (IsMissingReference(colision))
+                currentCollisions.RemoveAt(i);
         }
 
         Vector3 pos = transform.localPosition;
