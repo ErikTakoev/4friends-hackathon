@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigidbody2D;
 
     float velocityY = 0;
-    float velocityX = 3;
+    float velocityX = 4;
     bool isMovementPaused = false;
     List<GameObject> currentCollisions = new List<GameObject>();
     bool doubleJump = true;
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         rigidbody2D.MovePosition(pos);
         OnMove(pos);
 
-        velocityX = Mathf.MoveTowards(velocityX, 3f, Time.fixedDeltaTime);
+        velocityX = Mathf.MoveTowards(velocityX, 4f, Time.fixedDeltaTime);
     }
 
     
@@ -104,6 +104,10 @@ public class PlayerController : MonoBehaviour
     {
         // Add the GameObject collided with to the list.
         currentCollisions.Add(col.gameObject);
+        EnableGravity eg;
+        col.gameObject.TryGetComponent<EnableGravity>(out eg);
+        if (eg != null)
+            eg.Gravity();
     }
 
     void OnCollisionExit2D(Collision2D col)
