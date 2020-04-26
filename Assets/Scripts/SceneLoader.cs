@@ -20,6 +20,12 @@ public class SceneLoader : MonoBehaviour
 
     private void PrepareVideo()
     {
+        if (Application.isEditor)
+        {
+            LoadScene();
+            return;
+        }
+
         if (introShown)
         {
             LoadScene();
