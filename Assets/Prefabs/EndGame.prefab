@@ -186,3 +186,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlackBar: {fileID: 6782237371337535206}
+  FightPrefab: {fileID: 5720586727203662626, guid: ad77c7073dc2fd44db33c560919bac8f,
+    type: 3}
