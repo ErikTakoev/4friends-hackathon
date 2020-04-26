@@ -6,6 +6,7 @@ namespace Fight
     public class FightAudio : MonoBehaviour
     {
         [SerializeField] private AudioClip bossAttack;
+        [SerializeField] private AudioClip girlAttack;
         private AudioProvider audioProvider => ServiceLocator.Get<AudioProvider>();
 
         private void Awake()
@@ -44,6 +45,14 @@ namespace Fight
             if (audioProvider)
             {
                 audioProvider.PlayOnShotClip(bossAttack);
+            }
+        }
+
+        public void GirlAttack()
+        {
+            if (audioProvider)
+            {
+                audioProvider.PlayOnShotClip(girlAttack);
             }
         }
     }

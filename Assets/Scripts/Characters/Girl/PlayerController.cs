@@ -30,12 +30,12 @@ public class PlayerController : MonoBehaviour
     private void ActionProvider_OnWin(bool power)
     {
         if (power)
-            velocityX = 6;
+            velocityX = 5;
     }
 
     public void SetHitStars()
     {
-        velocityX = 0;
+        velocityX = 1;
         characterAnimation.SetHitAnimation();
     }
 
@@ -60,7 +60,12 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("END GAME");
 
-        GameObject.FindObjectOfType<BlackScreen>().EndGame();
+        if(collision.gameObject.name == "WinGame")
+        {
+            GameObject.FindObjectOfType<BlackScreen>().WinGame();
+        }
+        else
+            GameObject.FindObjectOfType<BlackScreen>().EndGame();
     }
 
     void FixedUpdate()
