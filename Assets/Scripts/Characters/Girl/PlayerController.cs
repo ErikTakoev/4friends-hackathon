@@ -63,6 +63,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.name == "MeteorArt")
+        {
+            return;
+        }
+
         Debug.Log("END GAME");
 
         if(collision.gameObject.name == "WinGame")
