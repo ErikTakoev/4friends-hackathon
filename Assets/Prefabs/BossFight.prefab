@@ -20956,6 +20956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossAttack: {fileID: 8300000, guid: d51a8e0644ebd4e4a88b7a740c252c88, type: 3}
+  girlAttack: {fileID: 8300000, guid: 57631b2c072df68478658521abded914, type: 3}
 --- !u!1 &5937317416577034272
 GameObject:
   m_ObjectHideFlags: 0
