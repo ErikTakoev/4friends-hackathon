@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76213de3b9c72b47a3d32ce75275dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transforms: []
+  transformParameters: []
   accelCoef: 0.05
 --- !u!4 &451610103
 Transform:
@@ -667,9 +667,7 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: eb0a44b752fcfd34da09b8d13d7b6dea, type: 2}
-  - {fileID: 7400000, guid: 0b47c49664a3b844e9f31c9a8e675f67, type: 2}
+  m_Animations: []
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
