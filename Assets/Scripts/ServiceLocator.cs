@@ -36,6 +36,13 @@ public class ServiceLocator
 
     public static T Get<T>()
     {
-        return (T)locators[typeof(T)];
+        var type = typeof(T);
+
+        if (locators.TryGetValue(type, out var locator))
+        {
+            return (T) locator;
+        }
+
+        return default;
     }
 }

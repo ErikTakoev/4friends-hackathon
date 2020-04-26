@@ -267,6 +267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kick: {fileID: 8300000, guid: f7f78f5b79937814ea3d4f4f69e5ad0f, type: 3}
+  fightClip: {fileID: 8300000, guid: 07ef47b9b032b6e4eb10a1d7decf692d, type: 3}
+  backMusic: {fileID: 8300000, guid: 2848d3a5095c01a4cbec82fbf14a4e7a, type: 3}
   audioSource: {fileID: 1473520234489474193}
 --- !u!1001 &2910205255356951769
 PrefabInstance:

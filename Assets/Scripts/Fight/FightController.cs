@@ -14,6 +14,7 @@ public class FightController : MonoBehaviour
     [SerializeField] private FightLogger fightLogger;
 
     [SerializeField] private Animation sceneAnimation;
+    [SerializeField] private FightAudio fightAudio;
     
     private FightVisualEffector visualEffector;
 
@@ -44,6 +45,7 @@ public class FightController : MonoBehaviour
     private void Start()
     {
         sceneAnimation.Play("BossFightIntro");
+        fightAudio.PlayAmbient();
         
         fightStateMachine.Add(FightState.FightStarted, OnGameStarted);
         fightStateMachine.Add(FightState.PlayerTurn, PlayerTurn);
