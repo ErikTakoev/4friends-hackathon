@@ -282,10 +282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76213de3b9c72b47a3d32ce75275dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 6205597299392246519}
-  transformParameters:
-  - transform: {fileID: 451610103}
-    coef: {x: 0.5, y: 0, z: 0}
+  transformParameters: []
+  accelCoef: 0.05
 --- !u!4 &451610103
 Transform:
   m_ObjectHideFlags: 0
