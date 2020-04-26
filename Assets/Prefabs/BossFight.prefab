@@ -20955,6 +20955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9504899d56e4aeba9721fb005be0465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossAttack: {fileID: 8300000, guid: d51a8e0644ebd4e4a88b7a740c252c88, type: 3}
 --- !u!1 &5937317416577034272
 GameObject:
   m_ObjectHideFlags: 0
