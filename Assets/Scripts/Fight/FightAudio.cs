@@ -7,6 +7,8 @@ namespace Fight
     {
         [SerializeField] private AudioClip bossAttack;
         [SerializeField] private AudioClip girlAttack;
+        [SerializeField] private AudioClip girlKick;
+        [SerializeField] private AudioClip bossKick;
         private AudioProvider audioProvider => ServiceLocator.Get<AudioProvider>();
 
         private void Awake()
@@ -53,6 +55,22 @@ namespace Fight
             if (audioProvider)
             {
                 audioProvider.PlayOnShotClip(girlAttack);
+            }
+        }
+
+        public void BossKick()
+        {
+            if (audioProvider)
+            {
+                audioProvider.PlayOnShotClip(bossKick);
+            }
+        }
+        
+        public void GirlKick()
+        {
+            if (audioProvider)
+            {
+                audioProvider.PlayOnShotClip(girlKick);
             }
         }
     }
