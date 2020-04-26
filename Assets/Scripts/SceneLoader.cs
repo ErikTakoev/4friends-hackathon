@@ -38,6 +38,7 @@ public class SceneLoader : MonoBehaviour
             firstFrame.gameObject.SetActive(true);
         }
 
+        rawImage.enabled = false;
         button.gameObject.SetActive(false);
         player.gameObject.SetActive(true);
         player.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Video", "Intro.mp4");
@@ -50,6 +51,7 @@ public class SceneLoader : MonoBehaviour
     private void OnPrepared(VideoPlayer player)
     {
         player.Play();
+        rawImage.enabled = true;
         rawImage.texture = player.texture;
     }
 
