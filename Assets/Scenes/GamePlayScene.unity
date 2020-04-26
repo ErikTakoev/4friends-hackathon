@@ -1385,6 +1385,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 72981750616585887, guid: d9ca30c66f8340f43b52b8a53f6dd654,
+        type: 3}
+      propertyPath: m_Name
+      value: MeteorArt
+      objectReference: {fileID: 0}
     - target: {fileID: 4907208722927022188, guid: d9ca30c66f8340f43b52b8a53f6dd654,
         type: 3}
       propertyPath: m_LocalRotation.x
