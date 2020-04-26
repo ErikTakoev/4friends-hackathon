@@ -13,26 +13,33 @@ public class SceneLoader : MonoBehaviour
 
     private static bool introShown = false;
     
-    void Start()
+    private void Start()
+    {
+        ShowButton();
+    }
+
+    private void PrepareVideo()
     {
         if (introShown)
         {
-            ShowButton();
+            LoadScene();
             return;
-        }
-
-        if (button != null)
-        {
-            button.gameObject.SetActive(false);
         }
 
         if (player == null || rawImage == null)
         {
             Debug.Assert(false);
-            ShowButton();
+            LoadScene();
             return;
         }
 
+        if (firstFrame != null)
+        {
+            firstFrame.gameObject.SetActive(true);
+        }
+
+        button.gameObject.SetActive(false);
+        player.gameObject.SetActive(true);
         player.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Video", "Intro.mp4");
         player.prepareCompleted += OnPrepared;
         player.errorReceived += OnVideoError;
@@ -42,11 +49,6 @@ public class SceneLoader : MonoBehaviour
 
     private void OnPrepared(VideoPlayer player)
     {
-        if (firstFrame != null)
-        {
-            firstFrame.gameObject.SetActive(false);
-        }
-
         player.Play();
         rawImage.texture = player.texture;
     }
@@ -54,14 +56,14 @@ public class SceneLoader : MonoBehaviour
     private void OnVideoError(VideoPlayer player, string error)
     {
         Debug.LogError("Cannot play Intro due to error '" + error + "'!");
-        ShowButton();
+        LoadScene();
     }
 
     private void OnVideoEnd(VideoPlayer player)
     {
         Debug.Log("Intro finished.");
         introShown = true;
-        ShowButton();
+        LoadScene();
     }
 
     private void ShowButton()
@@ -73,9 +75,6 @@ public class SceneLoader : MonoBehaviour
 
         if (player != null)
         {
-            player.prepareCompleted -= OnPrepared;
-            player.errorReceived -= OnVideoError;
-            player.loopPointReached -= OnVideoEnd;
             player.gameObject.SetActive(false);
         }
 
@@ -86,12 +85,20 @@ public class SceneLoader : MonoBehaviour
         else
         {
             button.gameObject.SetActive(true);
-            button.onClick.AddListener(LoadScene);
+            button.onClick.AddListener(PrepareVideo);
         }
     }
 
     private void LoadScene()
     {
+        if (player != null)
+        {
+            player.prepareCompleted -= OnPrepared;
+            player.errorReceived -= OnVideoError;
+            player.loopPointReached -= OnVideoEnd;
+            player.gameObject.SetActive(false);
+        }
+
         SceneManager.LoadScene(sceneName);
     }
 }
