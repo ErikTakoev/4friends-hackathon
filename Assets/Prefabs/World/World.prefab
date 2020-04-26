@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549586071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.777352, y: -5, z: -7.657529}
+  m_LocalPosition: {x: 8.777352, y: -6.3, z: -7.657529}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1339868729964981936}
@@ -147,6 +147,7 @@ Transform:
   - {fileID: 5346504451837308943}
   - {fileID: 911895046481985191}
   - {fileID: 1266175507775032694}
+  - {fileID: 2361142534734904364}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -244,6 +245,57 @@ Transform:
   m_Father: {fileID: 1339868729964981936}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6365929513740901726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2361142534734904364}
+  - component: {fileID: 3996977899899588844}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2361142534734904364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365929513740901726}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 110, y: 10.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1339868729964981936}
+  m_RootOrder: 63
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3996977899899588844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365929513740901726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4eb1fdbd511f48968454fc6eedcba84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeGen: 0.4
+  MinVelocity: {x: -100, y: -50, z: 0}
+  MaxVelocity: {x: -300, y: 50, z: 0}
+  ObjectPrefab: {fileID: 8876306215277528621, guid: 29c798caca1174936a485964d40993fa,
+    type: 3}
+  ObjectMinScale: 0.5
+  ObjectMaxScale: 1
+  DestroyTime: 5
 --- !u!1001 &401606865206709132
 PrefabInstance:
   m_ObjectHideFlags: 0
