@@ -31,18 +31,23 @@ public class PlayerController : MonoBehaviour
         if (power)
             velocityX = 5;
 
-        characterAnimation.Run();
+        characterAnimation.Attack();
     }
 
     public void SetHitStars()
     {
         velocityX = 1;
         characterAnimation.SetHitAnimation();
-        characterAnimation.Run();
     }
 
     private void Update()
     {
+        if (isMovementPaused)
+        {
+            rigidbody2D.velocity = Vector2.zero;
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if(currentCollisions.Count != 0)
@@ -97,10 +102,6 @@ public class PlayerController : MonoBehaviour
         }
         if(currentCollisions.Count == 0)
             pos.y -= 5f * Time.fixedDeltaTime;
-        else
-        {
-            //characterAnimation.Run();
-        }
 
         if (velocityY > 0)
         {
@@ -121,6 +122,7 @@ public class PlayerController : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D col)
     {
+        characterAnimation.Run();
         // Add the GameObject collided with to the list.
         currentCollisions.Add(col.gameObject);
         EnableGravity eg;
@@ -139,6 +141,8 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody2D.gravityScale = pause ? 0 : 1;
         isMovementPaused = pause;
+        if (pause)
+            characterAnimation.Idle();
     }
 
     public void SubscribeForMove(Action<Vector3> subscriber)
