@@ -20635,6 +20635,7 @@ GameObject:
   - component: {fileID: 4459651573532038892}
   - component: {fileID: 5273526364251759178}
   - component: {fileID: 3668808588193613588}
+  - component: {fileID: 738348952684173849}
   m_Layer: 5
   m_Name: BossFight
   m_TagString: Untagged
@@ -20768,6 +20769,7 @@ MonoBehaviour:
   skillHolder: {fileID: 6035820897426863835}
   fightLogger: {fileID: 9131446333430579125}
   sceneAnimation: {fileID: 3668808588193613588}
+  fightAudio: {fileID: 738348952684173849}
 --- !u!111 &3668808588193613588
 Animation:
   m_ObjectHideFlags: 0
@@ -20785,6 +20787,18 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &738348952684173849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720586727203662626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9504899d56e4aeba9721fb005be0465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5937317416577034272
 GameObject:
   m_ObjectHideFlags: 0
@@ -26074,7 +26088,7 @@ PrefabInstance:
     - target: {fileID: 5041547554747356094, guid: 1ef5f43485951cc4ebdbddd9d401d238,
         type: 3}
       propertyPath: m_SortingLayer
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6915380008797306847, guid: 1ef5f43485951cc4ebdbddd9d401d238,
         type: 3}
