@@ -33,7 +33,7 @@ public class SceneLoader : MonoBehaviour
             return;
         }
 
-        player.url = Application.streamingAssetsPath + "/Video/Intro.mp4";
+        player.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Video", "Intro.mp4");
         player.prepareCompleted += OnPrepared;
         player.errorReceived += OnVideoError;
         player.loopPointReached += OnVideoEnd;
