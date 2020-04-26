@@ -12,7 +12,7 @@ public class HpBarViewController : MonoBehaviour
 
     public void UpdateView(Attacker attacker)
     {
-        hpBar.fillAmount = attacker.Hp / attacker.CurrentHp;
+        hpBar.fillAmount = attacker.CurrentHp / attacker.Hp;
         hpText.text = $"{attacker.CurrentHp} / {attacker.Hp}";
     }
 }

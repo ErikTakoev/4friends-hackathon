@@ -11,6 +11,7 @@ namespace Fight
         [SerializeField] private HpBarViewController hpBarView;
         [SerializeField] private TMP_Text name;
         [SerializeField] private Animation animation;
+        [SerializeField] private Animator animator;
         
         public void Show()
         {
@@ -41,6 +42,16 @@ namespace Fight
             {
                 animation.Play("heal");
             }
+        }
+
+        public void AnimatorTransition()
+        {
+            animator.SetTrigger("Do");
+        }
+
+        public void AttackAnim()
+        {
+            animation.Play("GirlAttackBoss");
         }
     }
 }

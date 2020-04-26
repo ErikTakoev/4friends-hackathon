@@ -175,13 +175,18 @@ public class FightController : MonoBehaviour
 
             if (skill.SkillType == SkillType.Attack)
             {
-                enemyElement.PlayAnim(skill.SkillType);
+                playerElement.AttackAnim();
+                
+                call.AddTick(0.25f, EnemyGetDamage);
             }
             else
             {
                 playerElement.PlayAnim(skill.SkillType);
             }
         }
+
+        playerElement.UpdateView(playerAttacker);
+        enemyElement.UpdateView(enemyAttacker);
 
         if (currentState == FightState.EnemyTurn)
         {
@@ -191,18 +196,39 @@ public class FightController : MonoBehaviour
             
             if (skill.SkillType == SkillType.Attack)
             {
-                playerElement.PlayAnim(skill.SkillType);
+                enemyElement.AnimatorTransition();
+                
+                call.AddTick(1, MoveNextState);
+                call.AddTick(1, PlayerGetDamage);
+                
+                return;
             }
             else
             {
                 enemyElement.PlayAnim(skill.SkillType);
+                
+                playerElement.UpdateView(playerAttacker);
+                enemyElement.UpdateView(enemyAttacker);
             }
         }
 
+
+        MoveNextState();
+    }
+
+    public void EnemyGetDamage()
+    {
+        enemyElement.PlayAnim(lastSkill.SkillType);
+    }
+
+    public void PlayerGetDamage()
+    {
+        LogData(enemyAttacker);
+
+        playerElement.PlayAnim(lastSkill.SkillType);
+        
         playerElement.UpdateView(playerAttacker);
         enemyElement.UpdateView(enemyAttacker);
-        
-        MoveNextState();
     }
 
     public void ApplySkill(Attacker attacker, Attacker enemy, Skill skill)

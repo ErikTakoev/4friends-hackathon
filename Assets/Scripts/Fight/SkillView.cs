@@ -9,7 +9,8 @@ namespace Fight
     {
         [SerializeField] private TMP_Text skillText;
         [SerializeField] private TMP_Text buttonText;
-
+        [SerializeField] private Image icon;
+        
         private Button button;
         private Skill skill;
         
@@ -34,6 +35,7 @@ namespace Fight
             this.skill = skill;
 
             UpdateView();
+            icon.sprite = this.skill.Icon;
         }
 
         private void UpdateView()

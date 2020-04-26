@@ -10,7 +10,7 @@ namespace Fight
             skills.AddSkill(SkillsConstants.HardAttack());
             skills.AddSkill(SkillsConstants.ForkAttack());
             skills.AddSkill(SkillsConstants.Defend());
-            skills.AddSkill(SkillsConstants.Cry());
+            skills.AddSkill(SkillsConstants.Flirt());
 
             var attacker = new Attacker(150, 10, "Girl", skills);
 

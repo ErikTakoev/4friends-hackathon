@@ -37,6 +37,13 @@ namespace Fight
             return skill;
         }
         
+        public static Skill Flirt()
+        {
+            var skill = new Skill("Flirt", SkillType.Defend, 35, 15);
+
+            return skill;
+        }
+        
         public static Skill Harden ()
         {
             var skill = new Skill("Harden", SkillType.Defend, 25, 8);
