@@ -42,8 +42,8 @@ public class MeteorController : MonoBehaviour
 
     private void OnFarFlyEnd()
     {
-        transform.parent = origParent;
         flyAnimation.Play(nearFlyAnimName);
+        transform.parent = origParent;
 
         StartCoroutine(CheckIntersection());
     }
