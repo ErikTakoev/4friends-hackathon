@@ -35,7 +35,8 @@ public class CharacterAnimation : MonoBehaviour
 
     public void Jump_Loop()
     {
-        Animator.SetInteger("State", 4);
+        Run();
+        //Animator.SetInteger("State", 4);
     }
 
     public void SetHitAnimation()
